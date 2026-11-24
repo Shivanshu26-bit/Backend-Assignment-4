@@ -19,7 +19,6 @@ const client = new MongoClient(process.env.MONGO_URI);
 
 let users;
 let notes;
-await users.createIndex({ email: 1 }, { unique: true });
 
 // Event listeners
 events.on("signup", (email) => {
@@ -268,6 +267,7 @@ async function start() {
 
         users = db.collection("users");
         notes = db.collection("notes");
+        await users.createIndex({ email: 1 }, { unique: true });
 
         console.log("MongoDB Connected");
 
